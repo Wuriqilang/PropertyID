@@ -1,0 +1,50 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">资产列表</view></cu-custom>
+  <view class="cu-bar bg-gradual-blue search">
+    <view class="search-form radius">
+      <text class="cuIcon-search"></text>
+      <input type="text" placeholder="  搜索固定资产、部门、负责人" confirm-type="search"></input>
+    </view>
+    <view class="action">
+      <text class="cuIcon-close"></text>
+      <text>取消</text>
+    </view>
+  </view>
+<view wx:for="{{Property}}" wx:key class="cu-card case {{isCard?'no-card':''}}">
+  <view class="cu-item shadow">
+    <view class="image">
+      <image src="{{item.propertyImages[0]}}" mode="widthFix"></image>
+      <view class="cu-tag bg-blue">部门：{{item.propertyDep}}</view>
+      <view class="cu-tag bg-grey" style="top:50rpx;">使用人：{{item.propertyUser}}</view>
+      <view class="cu-bar bg-shadeBottom">
+        <text class="text-cut">{{item.propertyRemark}}</text>
+      </view>
+    </view>
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar lg" style="background-image:url(http://localhost:3000/static/img/generate.png);" bindtap='showModal' data-target="{{item}}"></view>
+        <view class="content flex-sub">
+          <view class="text-grey">资产编号：{{item.propertyID}}</view>
+          <view class="text-gray text-sm flex justify-between">
+            时间：{{item.propertyBuyDate}}
+            <view class="text-gray text-sm">
+              <text class="cuIcon-attentionfill margin-lr-xs"></text> 报废：{{item.propertyScrapDate}}
+							<!-- <text class="cuIcon-attentionfill margin-lr-xs"></text> 使用人： {{item.propertyUser}} -->
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="cu-modal {{modalName=='Image'?'show':''}}">
+  <view class="cu-dialog">
+		<view class="canvas-box">
+  <canvas bindtap="previewImg" style="width: 686rpx;height: 686rpx;background:#f1f1f1;" canvas-id="mycanvas"/>
+</view>
+    <view class="cu-bar bg-white">
+      <view class="action margin-0 flex-sub  solid-left" bindtap="hideModal">我知道了</view>
+    </view>
+  </view>
+</view>
+

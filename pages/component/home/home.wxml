@@ -1,0 +1,82 @@
+<scroll-view scroll-y class="scrollPage">
+	  <view class="cu-timeline">
+    <view class="cu-time">日志</view>
+    <block wx:for="{{Message}}" wx:key>
+      <view wx:if="{{item.messageType=='日志'}}" class="cu-item">
+        <view class="content">
+          <view class="">{{item.createdAt}}: {{item.messageContext}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="cu-timeline">
+    <view class="cu-time">审批</view>
+    <block wx:for="{{Message}}" wx:key>
+      <view wx:if="{{item.messageType=='划拨申请'}}" class="cu-item text-blue">
+        <view class="bg-blue shadow-blur content">
+          <view class="cu-list menu-avatar radius">
+            <view class="cu-item" style='height:380rpx;'>
+              <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"></view>
+              <view class="content">
+                <view class="text-grey">{{item.messageType}}</view>
+                <view class="text-gray text-sm">
+                  <text class="icon-infofill text-red">资产ID：{{item.messageContext.applyPropertyID}}</text>
+                </view>
+                <view class="text-gray text-sm">
+                  <text class="icon-infofill text-red">申请人：</text>{{item.messageContext.applyUser}} {{item.messageContext.applyUserID}}
+                </view>
+                <view class="text-gray text-sm">
+                  <text class="icon-infofill text-red">申请原因:{{item.messageContext.applyReason}}</text>
+                </view>
+                <view class="text-gray text-sm">
+                  <text class="icon-infofill text-red">接收人：</text>{{item.messageContext.receiveUser}} {{item.messageContext.receiveUserID}}
+                </view>
+                <view class="text-gray text-sm">
+                  <text class="icon-infofill text-red">接收部门：{{item.messageContext.receiveDep}}</text>
+                </view>
+              </view>
+              <view class="action">
+                <view class="text-grey text-xs">{{item.createdAt}}</view>
+                <view class="cu-tag round bg-grey sm">5</view>
+              </view>
+            </view>
+            <view class="cu-bar bg-white justify-end">
+              <view class="action">
+                <button class="cu-btn line-green text-green" bindtap="Reject" data-target="{{item}}">拒绝</button>
+                <button class="cu-btn bg-green margin-left" bindtap="Pass" data-target="{{item}}">通过</button>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="cu-timeline">
+    <view class="cu-time">消息</view>
+    <block wx:for="{{Message}}" wx:key>
+      <view wx:if="{{item.messageType=='通知'}}" class="cu-item">
+        <view class="content">
+          <view class="cu-capsule radius">
+            <view class="cu-tag bg-cyan">{{item.messageFrom}}</view>
+            <view class="cu-tag line-cyan">{{item.createdAt}}</view>
+          </view>
+          <view class="margin-top">{{item.messageContext}}</view>
+        </view>
+      </view>
+      <view wx:elif="{{item.messageType=='预警'}}" class="cu-item text-red cuIcon-attentionforbidfill">
+        <view class="content bg-red shadow-blur">
+          【预警:】{{item.messageContext}} 即将到期，请及时查看。—— {{item.createdAt}}
+        </view>
+      </view>
+      <view wx:elif="{{item.messageType=='消息'}}" class="cu-item">
+        <view class="content">
+          <text>{{item.createdAt}}</text> {{item.messageContext}} 
+        </view>
+      </view>
+    </block>
+  </view>
+
+
+  <view class='cu-tabbar-height'></view>
+</scroll-view>

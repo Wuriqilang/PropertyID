@@ -1,0 +1,42 @@
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">资产身份证</view>
+</cu-custom>
+<!-- <view class="margin-xl padding-xl bg-white radius shadow-lg">
+  <view class="flex justify-center">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn round bg-green shadow'> 获取头像昵称 </button>
+    <block wx:else>
+      <view class='text-center'>
+        <view class="cu-avatar xl round solids" style="background-image:url({{userInfo.avatarUrl}})"></view>
+        <view class="padding">{{userInfo.nickName}}</view>
+      </view>
+    </block>
+  </view>
+</view>
+<view class="text-center margin-top">
+  <text class="text-grey text-xl">{{motto}}</text>
+</view> -->
+
+<basics wx:if="{{PageCur=='basics'}}"></basics>
+<component wx:if="{{PageCur=='component'}}"></component>
+<plugin wx:if="{{PageCur=='plugin'}}"></plugin>
+<about wx:if="{{PageCur=='about'}}"></about>
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view class="action" bindtap="NavChange" data-cur="basics">
+    <view class='icon-cu-image'>
+      <image src="/images/tabbar/basics{{PageCur=='basics'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">管理</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="component">
+    <view class='icon-cu-image'>
+      <image src="/images/tabbar/component{{PageCur=='component'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='component'?'text-green':'text-gray'}}">通知</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="about">
+    <view class='icon-cu-image'>
+      <image src="/images/tabbar/about{{PageCur=='about'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='about'?'text-green':'text-gray'}}">关于</view>
+  </view>
+</view>

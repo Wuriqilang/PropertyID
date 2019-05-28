@@ -1,0 +1,28 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">资产报表</view></cu-custom>
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="icon-title text-blue"></text> 资产使用情况总览
+  </view>
+</view>
+<view class="container">
+    <canvas canvas-id="lineCanvas3" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+</view>
+
+
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="icon-title text-blue"></text> 2018年资产购买统计
+  </view>
+</view>
+<view class="container">
+    <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+</view>
+
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="icon-title text-blue"></text> 各部门使用资产统计
+  </view>
+</view>
+<view class="container">
+    <canvas canvas-id="lineCanvas2" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+</view>
