@@ -40,7 +40,7 @@ Page({
 		var that = this;
 		wx.request({
 			method: 'POST',
-			url: 'http://localhost:3000/getUserID/', //接口地址
+      url: app.globalData.BaseURL+'getUserID', //接口地址
 			data: {
 				userName:e.detail.value
 			},
@@ -121,7 +121,7 @@ Page({
       console.log(e.detail.value);
     wx.request({
     	method: 'POST',
-    	url: 'http://localhost:3000/propertySubmit', //接口地址
+      url: app.globalData.BaseURL+'propertySubmit', //接口地址
     	data: e.detail.value,
     	header: { 'content-type': 'application/json' },
     	success: function (res) {
@@ -157,20 +157,20 @@ Page({
     //return new Promise(function(reslove, reject){
       for (var i = 0; i < that.data.imgList.length; i++) {
         wx.uploadFile({
-          url: 'http://localhost:3000/imgUpload',
+          url: app.globalData.BaseURL+'imgUpload',
           filePath: that.data.imgList[i],
           name: 'picture',
           success: function (res) {
             var imgData = JSON.parse(res.data)
             if (that.data.img.length != 0) {
               that.setData({
-                img: that.data.img.concat("," + 'http://localhost:3000' + imgData.imgPath)
+                img: that.data.img.concat("," + app.globalData.BaseURL + imgData.imgPath)
               })
               //reslove('ok');
             }
             else{
               that.setData({
-                img: 'http://localhost:3000'+imgData.imgPath
+                img: app.globalData.BaseURL.substr(0, app.globalData.BaseURL.length-1)+imgData.imgPath
               })
             }
           }

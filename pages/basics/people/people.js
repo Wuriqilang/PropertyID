@@ -8,7 +8,7 @@ Page({
     console.log('onLoad')
     var that = this
     wx.request({
-      url: 'http://localhost:3000/getUsers' , //真实的接口地址
+      url: app.globalData.BaseURL+'getUsers' , //真实的接口地址
       data: {},
       header: { 'Content-Type': 'application/x-www-form-urlencoded' },
       success: function (res) {
@@ -74,7 +74,7 @@ Page({
     var that =this;
     wx.request({
       method: 'POST',
-      url: 'http://localhost:3000/ChangePeople', //接口地址
+      url: app.globalData.BaseURL+'ChangePeople', //接口地址
       data: modalData,
       header: { 'content-type': 'application/json' },
       success: function (res) {
@@ -117,7 +117,7 @@ Page({
     var that = this;
     wx.request({
       method: 'POST',
-      url: 'http://localhost:3000/SubmitPeople', //接口地址
+      url: app.globalData.BaseURL+'SubmitPeople', //接口地址
       data: modalData,
       header: { 'content-type': 'application/json' },
       success: function (res) {
@@ -164,7 +164,7 @@ Page({
           if (res.confirm) {
             wx.request({
               method: 'POST',
-              url: 'http://localhost:3000/DeletePeople',
+              url: app.globalData.BaseURL+'DeletePeople',
               data: { userID: e.target.dataset.target.userID },
               header: { 'content-type': 'application/json' },
               success: function (res) {

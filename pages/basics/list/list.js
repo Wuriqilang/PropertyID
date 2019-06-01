@@ -13,7 +13,7 @@ Page({
 		console.log('onLoad')
 		var that = this
 		wx.request({
-			url: 'http://localhost:3000/property/' + app.globalData.user.userID, //真实的接口地址
+      url: app.globalData.BaseURL+'property/' + app.globalData.user.userID, //真实的接口地址
 			data: {},
       header: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			success: function (res) {

@@ -15,7 +15,7 @@ Component({
     let that = this;
     // 获取消息信息
     wx.request({
-      url: 'http://localhost:3000/message/' + app.globalData.user.userID, //真实的接口地址
+      url: app.globalData.BaseURL+'message/' + app.globalData.user.userID, //真实的接口地址
 			//url: 'http://localhost:3000/message/admin' , //真实的接口地址
       data: {},
       header: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -56,7 +56,7 @@ Component({
 			var that = this;
 			wx.request({
 				method: 'POST',
-				url: 'http://localhost:3000/propertyChange',
+        url: app.globalData.BaseURL+'propertyChange',
 				//url: app.globalData.BaseURL +'propertyChange',
 				data: e.target.dataset.target.messageContext,
 				header: { 'content-type': 'application/json' },
@@ -73,7 +73,7 @@ Component({
 						query.MessageSubmit('admin', 'admin', e.target.dataset.target.messageContext.applyPropertyID+'完成划拨审批','日志');
 						query.MessageSubmit('admin', e.target.dataset.target.messageContext.applyUserID, '您提交的'+e.target.dataset.target.messageContext.applyPropertyID + '已经完成划拨审批,请知悉', '消息');
 						query.MessageSubmit('admin','固定资产'+ e.target.dataset.target.messageContext.receiveUserID, e.target.dataset.target.messageContext.applyPropertyID+'划拨由您负责，请知悉' , '消息');
-            created();
+            //created();
 					}
 					else {
 						wx.showToast({

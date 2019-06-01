@@ -20,7 +20,7 @@ Page({
 		console.log('onLoad')
 		var that = this;
 		wx.request({
-			url: 'http://localhost:3000/property/' + app.globalData.user.userID, //真实的接口地址
+      url: app.globalData.BaseURL+ 'property' + app.globalData.user.userID, //真实的接口地址
 			//url: 'http://localhost:3000/property/admin',
 			data: {},
 			header: {
@@ -73,7 +73,7 @@ Page({
 					if (res.confirm) {
 						wx.request({
 							method: 'POST',
-              url: 'http://localhost:3000/propertyScrap',
+              url: app.globalData.BaseURL+ 'propertyScrap',
 							data: { propertyID: e.target.dataset.target.propertyID },
 							header: { 'content-type': 'application/json' },
 							success: function (res) {
@@ -112,7 +112,7 @@ Page({
 		var that = this;
 		wx.request({
 			method: 'POST',
-			url: 'http://localhost:3000/getUserID/', //接口地址
+			url: app.globalData.BaseURL+ 'getUserID', //接口地址
 			data: {
 				userName: e.detail.value
 			},
@@ -145,7 +145,7 @@ Page({
 		//将信息处理为信息流，发送给后端
 		wx.request({
 			method: 'POST',
-			url: 'http://localhost:3000/messageSubmit', //接口地址
+      url: app.globalData.BaseURL + 'messageSubmit', //接口地址
 			data: {
 				messageFrom: modalData.applyUserID,
 				messageTo: 'admin',

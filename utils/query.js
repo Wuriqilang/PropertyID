@@ -1,9 +1,10 @@
+const app = getApp();
 //删除消息;
 function DeleteMessage(s) {
 	console.log(s);
 	wx.request({
 		method: 'POST',
-		url: 'http://localhost:3000/DeleteMessage',
+    url: app.globalData.BaseURL+'DeleteMessage',
 		data:{id:s},
 		header: { 'content-type': 'application/json' },
 		success: function (res) {
@@ -27,7 +28,7 @@ function MessageSubmit(messageFrom,messageTo,messageContext,messageType) {
 	console.log(messageFrom + "," + messageTo+","+messageContext);
 	wx.request({
 		method: 'POST',
-		url: 'http://localhost:3000/messageSubmit',
+    url: app.globalData.BaseURL+'messageSubmit',
 		data: { messageFrom: messageFrom,messageTo:messageTo,messageContext:messageContext,messageType:messageType },
 		header: { 'content-type': 'application/json' },
 		success: function (res) {
