@@ -15,8 +15,7 @@ Component({
     let that = this;
     // 获取消息信息
     wx.request({
-      url: app.globalData.BaseURL+'message/' + app.globalData.user.userID, //真实的接口地址
-			//url: 'http://localhost:3000/message/admin' , //真实的接口地址
+      url: app.globalData.BaseURL+'message/propertyID/' + app.globalData.user.userID, //真实的接口地址
       data: {},
       header: { 'Content-Type': 'application/x-www-form-urlencoded' },
       success: function (res) {
@@ -72,7 +71,7 @@ Component({
 						//生成新的信息：包括三个参数，发送人，接收人，信息内容。三条数据：删除成功，划拨成功，处理完成
 						query.MessageSubmit('admin', 'admin', e.target.dataset.target.messageContext.applyPropertyID+'完成划拨审批','日志');
 						query.MessageSubmit('admin', e.target.dataset.target.messageContext.applyUserID, '您提交的'+e.target.dataset.target.messageContext.applyPropertyID + '已经完成划拨审批,请知悉', '消息');
-						query.MessageSubmit('admin','固定资产'+ e.target.dataset.target.messageContext.receiveUserID, e.target.dataset.target.messageContext.applyPropertyID+'划拨由您负责，请知悉' , '消息');
+            query.MessageSubmit('admin', e.target.dataset.target.messageContext.receiveUserID,'固定资产'+ e.target.dataset.target.messageContext.applyPropertyID+'划拨由您负责，请知悉' , '消息');
             //created();
 					}
 					else {

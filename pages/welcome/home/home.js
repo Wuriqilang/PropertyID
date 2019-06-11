@@ -60,7 +60,7 @@ Page({
 			return;
 		} else {
 			wx.request({
-				method: 'POST',
+        method: 'POST',
 				url: app.globalData.BaseURL + 'propertyLogin',
 				//url:'https://rvkol.com/login',
 				data: e.detail.value,
@@ -70,10 +70,24 @@ Page({
 					if (res.data.success) {
 						//存储用户信息 用于用户登陆状态维护
 						app.globalData.user = res.data.data;
-						wx.navigateTo({
-							url: '/pages/index/index'
-						})
-					}
+            wx.showToast({
+              title:'登录成功！',
+              icon:'loading',
+              duration: 1500
+            })
+            setTimeout(()=>{
+              wx.navigateTo({
+                url: '/pages/index/index'
+              })
+            },1000)
+
+					}else{
+            wx.showToast({
+              title: '输入有误！',
+              icon: 'none',
+              duration:2000
+            })
+          }
 				},
 				fail: function (res) {
 					console.log('Error' + ':' + res)

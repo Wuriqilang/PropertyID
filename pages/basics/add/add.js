@@ -6,7 +6,7 @@ Page({
     index: null,
     picker: ['办公室', '收入核算股', '征收管理股', '税源管理股', '党建工作股', '纪检组', '纳税服务股', '税政股', '劳务外聘', '物业公司'],
     date: '2019-01-01',
-		date2:'2020-01-01',
+    date2: '2020-01-01',
     imgList: [],
     modalName: null,
     textareaAValue: '',
@@ -30,38 +30,39 @@ Page({
     })
   },
   DateChangeScrap(e) {
-		this.setData({
-			date2: e.detail.value
-		})
-	},
-	GetUserID(e){
-		console.log(e.detail.value)
-		//获取数据并将数据存入userID中
-		var that = this;
-		wx.request({
-			method: 'POST',
-      url: app.globalData.BaseURL+'getUserID', //接口地址
-			data: {
-				userName:e.detail.value
-			},
-			header: { 'content-type': 'application/json' },
-			success: function (res) {
-				console.log(res);
-				if (res.statusCode == 200) {
-					that.setData({
-						userID: res.data
-					})
-				}
-				else {
-					wx.showToast({
-						title: '查无此人，请确认使用人名字无误！',
-						icon: 'none',
-						duration: 2000
-					})
-				}
-		}
-		})
-	},
+    this.setData({
+      date2: e.detail.value
+    })
+  },
+  GetUserID(e) {
+    console.log(e.detail.value)
+    //获取数据并将数据存入userID中
+    var that = this;
+    wx.request({
+      method: 'POST',
+      url: app.globalData.BaseURL + 'getUserID', //接口地址
+      data: {
+        userName: e.detail.value
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function(res) {
+        console.log(res);
+        if (res.statusCode == 200) {
+          that.setData({
+            userID: res.data
+          })
+        } else {
+          wx.showToast({
+            title: '查无此人，请确认使用人名字无误！',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
+    })
+  },
   ChooseImage() {
     wx.chooseImage({
       count: 4, //默认9
@@ -115,67 +116,67 @@ Page({
     e.detail.value.propertyID = e.detail.value.propertyID + 'GS' + Date.now();
     //将图片进行上传
     this.upload();
-    var that =this;
-    setTimeout(function(){
+    var that = this;
+    setTimeout(function() {
       e.detail.value.imgPath = that.data.img;
       console.log(e.detail.value);
-    wx.request({
-    	method: 'POST',
-      url: app.globalData.BaseURL+'propertySubmit', //接口地址
-    	data: e.detail.value,
-    	header: { 'content-type': 'application/json' },
-    	success: function (res) {
-    		console.log(res);
-    		if (res.statusCode == 200) {
-    			wx.showToast({
-    				title: res.data.code,
-    				icon: 'success',
-    				duration: 2000
-    			})
-          setTimeout(function () {
-            wx.navigateBack({
-              url: '../home/home',
+      wx.request({
+        method: 'POST',
+        url: app.globalData.BaseURL + 'propertySubmit', //接口地址
+        data: e.detail.value,
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function(res) {
+          console.log(res);
+          if (res.statusCode == 200) {
+            wx.showToast({
+              title: res.data.code+'请继续录入',
+              icon: 'success',
+              duration: 2000
             })
-          }, 2000)
-    		}
-    		else {
-    			wx.showToast({
-    				title: '失败，请注意输入格式！',
-    				icon: 'none',
-    				duration: 2000
-    			})
-    		}
-    	},
-    	fail: function (res) {
-    		console.log('Error' + ':' + res)
-    	}
-    })
-    },1000);
+            that.setData({
+              userName:'',
+              userID:'',
+              textareaAValue:''
+            })
+          } else {
+            wx.showToast({
+              title: '失败，请注意输入格式！',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        },
+        fail: function(res) {
+          console.log('Error' + ':' + res)
+        }
+      })
+    }, 1000);
   },
-  upload: function () {
+
+  upload: function() {
     var that = this;
     //return new Promise(function(reslove, reject){
-      for (var i = 0; i < that.data.imgList.length; i++) {
-        wx.uploadFile({
-          url: app.globalData.BaseURL+'imgUpload',
-          filePath: that.data.imgList[i],
-          name: 'picture',
-          success: function (res) {
-            var imgData = JSON.parse(res.data)
-            if (that.data.img.length != 0) {
-              that.setData({
-                img: that.data.img.concat("," + app.globalData.BaseURL + imgData.imgPath)
-              })
-              //reslove('ok');
-            }
-            else{
-              that.setData({
-                img: app.globalData.BaseURL.substr(0, app.globalData.BaseURL.length-1)+imgData.imgPath
-              })
-            }
+    for (var i = 0; i < that.data.imgList.length; i++) {
+      wx.uploadFile({
+        url: app.globalData.BaseURL + 'imgUpload',
+        filePath: that.data.imgList[i],
+        name: 'picture',
+        success: function(res) {
+          var imgData = JSON.parse(res.data)
+          if (that.data.img.length != 0) {
+            that.setData({
+              img: that.data.img.concat("," + app.globalData.BaseURL + imgData.imgPath)
+            })
+            //reslove('ok');
+          } else {
+            that.setData({
+              img: app.globalData.BaseURL.substr(0, app.globalData.BaseURL.length - 1) + imgData.imgPath
+            })
           }
-        })
-      }
-    //})
+        }
+      })
+    }
   }
 })

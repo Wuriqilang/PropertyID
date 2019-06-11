@@ -7,7 +7,7 @@
   </view>
   <view class="cu-form-group">
     <view class="title">购入时间</view>
-    <picker name="propertyBuyDate" mode="date" value="{{date}}" start="2010-09-01" end="2022-09-01" bindchange="DateChange">
+    <picker name="propertyBuyDate" mode="date" value="{{date}}" start="2000-09-01" end="2100-09-01" bindchange="DateChange">
       <view class="picker">
         {{date}}
       </view>
@@ -16,7 +16,7 @@
   <view class="cu-form-group">
     <view class="title">报废时间</view>
     <!-- <input style="text-align:right;" name="propertyScrapMouth" placeholder="输入报废月份"></input> -->
-		    <picker name="propertyScrapDate" mode="date" value="{{date2}}" start="2010-09-01" end="2022-09-01" bindchange="DateChangeScrap">
+		    <picker name="propertyScrapDate" mode="date" value="{{date2}}" start="2000-09-01" end="2100-09-01" bindchange="DateChangeScrap">
       <view class="picker">
         {{date2}}
       </view>
@@ -34,7 +34,7 @@
   </view>
     <view class="cu-form-group">
     <view class="title">使用人</view>
-    <input style="text-align:right;" name="propertyUser" placeholder="输入资产负责人" bindblur='GetUserID'></input>
+    <input style="text-align:right;" name="propertyUser" placeholder="输入资产负责人" value="{{userName}}" bindblur='GetUserID'></input>
     </view>
 		    <view class="cu-form-group">
     <view class="title">使用人工号</view>

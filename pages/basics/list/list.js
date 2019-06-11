@@ -7,7 +7,8 @@ Page({
 		StatusBar: app.globalData.StatusBar,
 		CustomBar: app.globalData.CustomBar,
 		qrImage:'',
-		qr_h:330
+		qr_h:330,
+    Property:[]
 	},
 	onLoad() {
 		console.log('onLoad')
@@ -63,12 +64,14 @@ Page({
 		}, 2000)
 		this.setData({
 			modalName: 'Image',
+      canvasLeft: '0'
 			//qr_h: that.setCanvasSize().height
 		})
 	},
 	hideModal(e) {
 		this.setData({
-			modalName: null
+			modalName: null,
+      canvasLeft:'10000'
 		})
 	},
 	//适配不同屏幕大小的canvas
@@ -120,4 +123,22 @@ Page({
 			urls: [img] // 需要预览的图片http链接列表
 		})
 	},
+  searchProperty(e) {
+    let key = e.detail.value.toLowerCase();
+    let list = this.data.Property;
+    for (let i = 0; i < list.length; i++) {
+      let a = key;
+      let searchID = list[i].propertyID.toLowerCase();
+      let searchName = list[i].propertyUser.toLowerCase();
+      let searchDep = list[i].propertyDep.toLowerCase();
+      if (searchID.search(a) != -1 || searchName.search(a) != -1 || searchDep.search(a) != -1) {
+        list[i].isShow = true
+      } else {
+        list[i].isShow = false
+      }
+    }
+    this.setData({
+      Property: list
+    })
+  }
 });

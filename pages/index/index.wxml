@@ -18,7 +18,6 @@
 
 <basics wx:if="{{PageCur=='basics'}}"></basics>
 <component wx:if="{{PageCur=='component'}}"></component>
-<plugin wx:if="{{PageCur=='plugin'}}"></plugin>
 <about wx:if="{{PageCur=='about'}}"></about>
 <view class="cu-bar tabbar bg-white shadow foot">
   <view class="action" bindtap="NavChange" data-cur="basics">

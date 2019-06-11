@@ -1,5 +1,7 @@
 // pages/basics/delete/delete.js
 const app = getApp();
+//调用方法组
+var query = require('../../../utils/query.js');
 Page({
 
 	/**
@@ -20,8 +22,7 @@ Page({
 		console.log('onLoad')
 		var that = this;
 		wx.request({
-      url: app.globalData.BaseURL+ 'property' + app.globalData.user.userID, //真实的接口地址
-			//url: 'http://localhost:3000/property/admin',
+      url: app.globalData.BaseURL+ 'property/' + app.globalData.user.userID, //真实的接口地址
 			data: {},
 			header: {
 				'content-type': 'application/json'
@@ -33,7 +34,7 @@ Page({
 					})
 				}
 				else {
-					console.log(res.data)
+					console.log(res)
 					for (var i of res.data) {
 						i.propertyImages = i.propertyImages.split(',')
 					};
@@ -83,6 +84,7 @@ Page({
                     icon: 'success',
                     duration: 2000
                   })
+                  query.MessageSubmit('admin', 'admin','固定资产'+ e.target.dataset.target.propertyID + '完成报废', '日志');
 								}
 								else {
 									wx.showToast({
@@ -150,7 +152,8 @@ Page({
 				messageFrom: modalData.applyUserID,
 				messageTo: 'admin',
 				messageContext: JSON.stringify(modalData),
-				messageType: '划拨申请'
+				messageType: '划拨申请',
+        messageSource:'propertyID'
 			},
 			header: { 'content-type': 'application/json' },
 			success: function (res) {

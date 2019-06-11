@@ -4,7 +4,7 @@
 </cu-custom>
 <view class="cu-bar bg-white solid-bottom">
   <view class="action">
-    <text class="cuIcon-title text-orange "></text> 待报废资产
+    <text class="cuIcon-title text-orange "></text> 资产列表
   </view>
 </view>
 <view class="cu-list menu-avatar">
@@ -14,7 +14,7 @@
       <view class="text-grey">{{item.propertyID}}</view>
       <view class="text-gray text-sm">
         <text class="cuIcon-infofill text-red"></text>
-        <text>{{item.propertyBuyDate}}</text>
+        <text>{{item.propertyScrapDate}}</text>
         <text class='margin-left'>{{item.propertyDep}}</text>
         <text class='margin-left'>{{item.propertyUser}}</text>
       </view>
@@ -22,7 +22,7 @@
     </view>
     <view class="action">
       <view class="text-grey text-xs">距报废</view>
-      <view class="cu-tag round bg-grey sm">555</view>
+      <view class="cu-tag round bg-grey sm">{{item.propertyMargin}}</view>
     </view>
     <view class="move">
       <view class="bg-grey" bindtap="scrapProperty" data-target="{{item}}">报废</view>
@@ -87,7 +87,7 @@
           <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
           <button class="cu-btn bg-green margin-left" formType="submit">确定</button>
         </view>
-      </view>
+        </view>
       </form>
 
     </view>
